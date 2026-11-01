@@ -1,0 +1,61 @@
+name: person-finance
+services:
+  wealthfolio:
+    image: wealthfolio/wealthfolio:3.11.0@sha256:3e996e9b3fbf9c945eca89e7b89eb03e0966beb1c51b977ccccb811f76ae2994
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8088:8088"
+    volumes:
+      - ./data/wealthfolio:/data
+    environment:
+      WF_LISTEN_ADDR: "0.0.0.0:8088"
+      WF_DB_PATH: "/data/wealthfolio.db"
+      WF_DB_REQUIRE_ENCRYPTION: "1"
+      WF_SECRET_KEY: "${WF_SECRET_KEY:?Run scripts/setup.py first}"
+      WF_AUTH_PASSWORD_HASH: "${WF_AUTH_PASSWORD_HASH:?Run scripts/setup.py first}"
+      WF_CORS_ALLOW_ORIGINS: "http://localhost:8088,http://127.0.0.1:8088"
+      WF_AUTH_TOKEN_TTL_MINUTES: "1440"
+      WF_MCP_ENABLED: "false"
+      WF_REQUEST_TIMEOUT_MS: "60000"
+      TZ: "Asia/Shanghai"
+    healthcheck:
+      test:
+        ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://127.0.0.1:8088/api/v1/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:size=64M
+    mem_limit: 768m
+  market-data:
+    build: ./market_data
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8090:8090"
+    volumes:
+      - ./data/market:/data
+    environment:
+      TZ: "Asia/Shanghai"
+      MARKET_CACHE_DIR: /data
+      MARKET_DATA_ENGINE: akshare
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8090/health', timeout=5)",
+        ]
+      interval: 30s
+      timeout: 6s
+      retries: 3
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:size=32M
+    mem_limit: 768m
