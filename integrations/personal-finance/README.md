@@ -11,7 +11,7 @@ AI 助手使用。没有修改 Wealthfolio 源码，没有券商登录或自动�
 
 产品规划：[需求差距、功能精简与演进计划](docs/requirements-and-roadmap.md)，记录当前能力、缺口、建议优先级及阶段验收标准。
 
-近期收口：[功能与代码收口计划](docs/feature-consolidation-plan.md)，按“先隐藏、验证、停用，再按依赖删除”推进，保留现有账本和演示数据。
+近期收口：[功能与代码收口计划](docs/feature-consolidation-plan.md)，主要功能保留，近期以入口整理和国内适配为主，不安排业务模块删除；保留现有账本和演示数据。
 
 代码仓库：[个人 Fork：rikewang/wealthfolio](https://github.com/rikewang/wealthfolio)，上游为
 [wealthfolio/wealthfolio](https://github.com/wealthfolio/wealthfolio)。本目录纳入部署代码、AKShare 适配器和产品规划；运行数据在使用者本机生成。Compose 使用固定的官方 3.11.0 镜像，与仓库根目录的源码开发流程独立。
