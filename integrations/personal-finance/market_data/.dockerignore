@@ -1,0 +1,12 @@
+__pycache__/
+test_*.py
+.env*
+.secrets/
+data/
+backups/
+.cache/
+.venv/
+*.db*
+*.sqlite*
+*.pem
+*.key

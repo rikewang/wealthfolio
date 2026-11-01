@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")"
+case "${1:-help}" in
+  start)
+    .venv/bin/python scripts/setup.py
+    docker compose up -d --build --wait --wait-timeout 60
+    echo 'Wealthfolio: http://localhost:8088  数据状态: http://localhost:8090/status'
+    ;;
+  stop) docker compose stop ;;
+  status) docker compose ps ;;
+  init-demo) .venv/bin/python scripts/bootstrap.py ;;
+  demo) .venv/bin/python scripts/enrich_demo.py ;;
+  check) .venv/bin/python scripts/check.py ;;
+  test) .venv/bin/python -m unittest market_data.test_app -v ;;
+  refresh|backup|add) .venv/bin/python scripts/manage.py "$@" ;;
+  *) echo '用法: ./finance {start|stop|status|init-demo|demo|refresh|check|test|backup|add 代码 名称 --type stock|fund|etf|gold}' ;;
+esac
