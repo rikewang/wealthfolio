@@ -51,6 +51,16 @@
 
 </div>
 
+## Personal finance integration (fork)
+
+This fork includes an optional
+[AKShare integration](integrations/personal-finance/README.md) for A-shares,
+public funds, and Shanghai Gold Exchange prices, plus a
+[Chinese requirements and roadmap document](integrations/personal-finance/docs/requirements-and-roadmap.md).
+The integration uses a separate local service and Wealthfolio's custom market
+data API. Credentials, local databases, caches, and backups are excluded from
+the repository.
+
 ## Introduction
 
 **Wealthfolio** is an open-source, private portfolio tracker — investments, net

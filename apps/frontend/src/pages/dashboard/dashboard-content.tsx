@@ -23,7 +23,6 @@ import type { AccountScope } from "@/lib/types";
 import { accountScopeKey } from "@/pages/allocation-targets/components/target-scope";
 import { AccountsSummary } from "./accounts-summary";
 import Balance from "./balance";
-import SavingGoals from "./goals";
 import TopHoldings from "./top-holdings";
 import { useDashboardPeriod } from "./use-dashboard-period";
 
@@ -301,7 +300,6 @@ export function DashboardContent({
                 isLoading={isHoldingsLoading}
                 baseCurrency={baseCurrency}
               />
-              <SavingGoals />
             </div>
           </div>
         </div>
