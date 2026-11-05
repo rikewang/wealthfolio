@@ -69,7 +69,7 @@ export function LoginPage() {
   };
 
   return (
-    <ApplicationShell className="fixed inset-0 flex items-center justify-center p-6">
+    <ApplicationShell className="profile-lock-screen fixed inset-0 flex items-center justify-center p-6">
       <div className="w-full max-w-md -translate-y-[5vh]">
         <Card className="w-full border-none bg-transparent shadow-none">
           <CardHeader className="space-y-4 text-center">
