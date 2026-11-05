@@ -17,7 +17,6 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 import { type NavLink, type NavigationProps, isPathActive } from "./app-navigation";
-import { ConnectNavItem } from "./connect-nav-item";
 import { resolveNavigationIcon } from "./navigation-icons";
 
 interface AppSidebarProps {
@@ -53,42 +52,6 @@ export function AppSidebar({ navigation }: AppSidebarProps) {
                 aria-label={t("common:layout.sidebar")}
                 className="flex shrink-0 flex-col p-2"
               >
-                <div
-                  data-tauri-drag-region="true"
-                  className="draggable flex items-center justify-center pb-6"
-                >
-                  <Link
-                    to="/"
-                    aria-label={t("common:app_name")}
-                    className="group/logo block shrink-0 [perspective:400px]"
-                  >
-                    {/* Collapsing flips the logo; hovering turns it a quarter clockwise, as on
-                        the website (mirrored while collapsed, hence -90deg). */}
-                    <img
-                      className={cn(
-                        "h-10 w-10 rounded-full bg-transparent shadow-lg transition-transform duration-1000 ease-in-out motion-reduce:transition-none",
-                        collapsed
-                          ? "motion-safe:[transform:rotateY(180deg)] motion-safe:group-hover/logo:[transform:rotateY(180deg)_rotate(-90deg)]"
-                          : "motion-safe:[transform:rotateY(0deg)] motion-safe:group-hover/logo:[transform:rotateY(0deg)_rotate(90deg)]",
-                      )}
-                      aria-hidden="true"
-                      src="/logo.png"
-                    />
-                  </Link>
-
-                  <span
-                    className={cn(
-                      "text-md text-foreground/90 ms-2 font-serif text-xl font-bold transition-opacity delay-100 duration-300 ease-in-out",
-                      {
-                        "sr-only opacity-0": collapsed,
-                        "block opacity-100": !collapsed,
-                      },
-                    )}
-                  >
-                    Wealthfolio
-                  </span>
-                </div>
-
                 <Button
                   type="button"
                   variant="ghost"
@@ -157,7 +120,6 @@ export function AppSidebar({ navigation }: AppSidebarProps) {
             </div>
 
             <div className="flex shrink-0 flex-col p-2">
-              <ConnectNavItem collapsed={collapsed} />
               {navigation?.secondary?.map((item) => (
                 <NavItem key={item.title} item={item} collapsed={collapsed} />
               ))}
