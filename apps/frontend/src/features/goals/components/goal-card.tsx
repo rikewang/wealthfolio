@@ -164,18 +164,15 @@ export function GoalCard({ goal }: { goal: Goal }) {
           <img
             src={coverImage}
             alt=""
-            className="h-full w-full object-cover transition-all duration-500 group-hover:scale-[1.06] dark:brightness-[0.78] dark:contrast-[1.08] dark:saturate-[0.9]"
+            className="h-full w-full object-cover transition-all duration-500 group-hover:scale-[1.06]"
             style={{ objectPosition: "70% 50%" }}
             onError={(e) => {
               e.currentTarget.style.display = "none";
             }}
           />
 
-          {/* Dark-mode blend: softens bright image bg against the dark card */}
-          <div className="pointer-events-none absolute inset-0 hidden bg-black/30 mix-blend-multiply dark:block" />
-
           {/* Bottom gradient — quote legibility in both themes */}
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 via-black/20 via-60% to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/45 via-black/15 via-60% to-transparent" />
 
           {/* Top-left status badge — only for attention-worthy states */}
           {pill && (
